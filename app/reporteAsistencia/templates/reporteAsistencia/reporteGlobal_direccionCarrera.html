@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-6 bg-gray-100 min-h-screen">
+
+    <!-- ENCABEZADO -->
+    <div class="bg-white rounded-2xl shadow p-6 mb-6 flex justify-between items-center">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Reporte Global de Asistencias</h2>
+            
+            <p class="text-gray-500 text-sm">Total de Asistencias: {{ asistencias|length }}</p>
+
+        </div>
+
+        <a href="{% url 'reporteAsistencia:pdf_global_direccionCarrera' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition">Descargar PDF</a>
+
+    </div>
+
+    <!-- FILTROS -->
+    <div class="bg-gray-100 p-4 rounded mb-6 flex flex-wrap gap-4 items-end">
+        <form method="get" class="flex flex-wrap gap-4">
+            <div>
+                <label class="block font-bold mb-1">Semestre</label>
+                <select name="semestre" class="border rounded p-2">
+                    <option value="">Todos</option>
+                    {% for semestre in semestres %}
+                        <option value="{{ semestre.pk }}" {% if semestre_seleccionado == semestre.pk %}selected{% endif %}>
+                            {{ semestre.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold mb-1">Paralelo</label>
+                <select name="paralelo" class="border rounded p-2">
+                    <option value="">Todos</option>
+                    {% for paralelo in paralelos %}
+                        <option value="{{ paralelo.pk }}" {% if paralelo_seleccionado == paralelo.pk %}selected{% endif %}>
+                            {{ paralelo.numeroParalelo }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filtrar</button>
+                <a href="{% url 'reporteAsistencia:reporteGlobal_direccionCarrera' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Limpiar</a>
+            </div>
+        </form>
+    </div>    
+    <!-- TABLA -->
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+        
+        <!-- TÍTULO TABLA -->
+        <div class="p-4 border-b">
+            <h3 class="text-lg font-semibold text-gray-700">
+                Lista de Asistencias
+            </h3>
+        </div>
+
+        <!-- CONTENEDOR SCROLL -->
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full text-sm text-left">
+                
+                <!-- HEADER -->
+                <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+                    <tr>
+                        <th class="px-4 py-3">RU</th>
+                        <th class="px-4 py-3">Nombre</th>
+                        <th class="px-4 py-3">Semestre</th>
+                        <th class="px-4 py-3">Paralelo</th>
+                        <th class="px-4 py-3">Materia</th>
+                        <th class="px-4 py-3">Hora</th>
+                        <th class="px-4 py-3">Fecha</th>
+
+                    </tr>
+                </thead>
+
+                <!-- BODY -->
+                <tbody class="divide-y">
+
+                    <!-- CREDENCIALES -->
+                    {% for a in asistencias %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-3 font-medium text-gray-800">
+                            {{ a.estudiante__RU }}
+                        </td>
+
+                        <td class="px-4 py-3">
+                            {{ a.estudiante__nombre }} {{ a.estudiante__apellido }}
+                        </td>
+                        
+                        <td class="px-4 py-3">
+                            {{ a.estudiante__semestre__nombre }}
+                        </td>
+
+                        <td class="px-4 py-3">
+                            {{ a.estudiante__paralelo__numeroParalelo }}
+                        </td>
+
+                        <td class="px-4 py-3 text-gray-600">
+                            {{ a.asignacion_docente__materia__nombre }}
+                        </td>
+
+                        <td class="px-4 py-3 text-gray-600">
+                            {{ a.hora_ingreso }}
+                        </td>
+
+                        <td class="px-4 py-3 text-gray-600">
+                            {{ a.fecha_ingreso|date:"d/m/Y" }}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+           
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

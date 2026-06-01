@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block sidebar %}
+  {% include "estudiante/navBar.html" %}
+{% endblock %}
+
+
+{% block content %}
+<!-- Materias y paralelos -->
+<div class="bg-white shadow-lg rounded-xl p-8 mx-auto mt-2">
+  <h2 class="text-2xl font-bold mb-4">Materias asignadas</h2>
+  <table class="min-w-full border border-gray-200 rounded-lg">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-2 text-left">Siglas</th>
+        <th class="px-4 py-2 text-left">Materia</th>
+        <th class="px-4 py-2 text-left">Docente</th>
+        <th class="px-4 py-2 text-left">Semestre</th>
+
+
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for asignacion in asignaciones %}
+                <tr>
+                    <td class="border px-4 py-2">{{ asignacion.materia.materiaID }}</td>
+                    <td class="border px-4 py-2">{{ asignacion.materia.nombre }}</td>
+                    <td class="border px-4 py-2">{{ asignacion.docente.nombre }} {{ asignacion.docente.apellido }}</td>
+                    <td class="border px-4 py-2">{{ asignacion.materia.semestre.nombre}}</td>
+                </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7" class="border px-4 py-2 text-center text-gray-500">
+                    No tienes AsignacionDocentees registradas.
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

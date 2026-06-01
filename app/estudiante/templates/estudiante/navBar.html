@@ -1,0 +1,43 @@
+<aside class="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- parte superior-->
+  <div class="p-5">
+    <h2 class="text-xl font-bold mb-6">MENÚ PRINCIPAL</h2>
+
+    <ul class="space-y-4">
+      <li>
+        <a href="{% url 'estudiante:perfil' %}" class="hover:text-blue-400"
+          >Perfil</a
+        >
+      </li>
+
+      <li>
+        <a
+          href="{% url 'estudiante:asignacion_materias' %}"
+          class="hover:text-blue-400"
+          >Materias Asignadas</a
+        >
+      </li>
+
+      <li>
+        <a href="{% url 'estudiante:horario' %}" class="hover:text-blue-400"
+          >Horario de Clases</a
+        >
+      </li>
+
+      <li>
+        <a
+          href="{% url 'reporteAsistencia:reporte_estudiante' estudiante.RU %}"
+          class="hover:text-blue-400"
+          >Reporte de Asistencias Personal</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- parte inferior -->
+  <div class="mt-auto p-5">
+    <a href="{% url 'index'%}" class="text-red-400 hover:text-red-600"
+      >Cerrar Sesión</a
+    >
+  </div>
+</aside>

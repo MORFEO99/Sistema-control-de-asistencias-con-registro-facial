@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Diario - Docente</title>
+    <style>
+        body {
+            font-family: Helvetica;
+            font-size: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .bordered td, .bordered th {
+            margin-top: 20px;
+            border: 1px solid black;
+            padding: 4px;
+        }
+        .header-table {
+            border: 1px solid black;
+        }
+        .header-table td {
+            border: 1px solid black;
+            vertical-align: middle;
+        }
+        .title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .subtitle {
+            text-align: left;
+            font-size: 11px;
+        }
+        .section {
+            margin-top: 10px;
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 3px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- encabezado -->
+<table class="header-table">
+    <tr>
+        <!-- LOGO -->
+        <td style="width: 30%; text-align:center;">
+            <img src="{{ logo_url }}" alt="Logo salesiana" width="120">
+        </td>
+
+        <!--subtitulo -->
+        <td style="width: 70%;">
+            <div class="title">REPORTE DIARIO</div>
+            <div class="subtitle">Docente: {{ docente.nombre }} {{ docente.apellido }}</div>
+            <div class="subtitle">Materia: {{ docente.asignaciondocente_set.first.materia.nombre }}</div>
+            <div class="subtitle">Paralelo: {{ docente.asignaciondocente_set.first.paralelo.numeroParalelo }}</div>
+            <div class="subtitle">Semestre: {{ docente.asignaciondocente_set.first.materia.semestre.nombre }}</div>
+            <div class="subtitle">Carrera: {{ docente.carrera.nombre }}</div>
+            <div class="subtitle">Fecha: {{ hoy|date:"d/m/Y" }}</div>
+            <div class="subtitle">Estudiantes Presentes: {{ asistencias|length }}</div>
+        </td>
+    </tr>
+</table>
+
+<!--content-->
+<div class="section">Lista de Estudiantes Presentes</div>
+<table class="bordered">
+    <tr>
+        <th>RU</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Materia</th>
+        <th>Hora Ingreso</th>
+    </tr>
+    {% for a in asistencias %}
+    <tr>
+        <td>{{ a.estudiante.RU }}</td>
+        <td>{{ a.estudiante.nombre }}</td>
+        <td>{{ a.estudiante.apellido }}</td>
+        <td>{{ a.asignacion_docente.materia.nombre }}</td>
+        <td>{{ a.hora_ingreso }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

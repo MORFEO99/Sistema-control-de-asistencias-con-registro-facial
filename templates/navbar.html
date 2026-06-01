@@ -1,0 +1,22 @@
+{% load static %}
+
+<nav class="w-full bg-white p-4 flex justify-between items-center fixed top-0 left-0">
+    <!-- Logo -->
+    <div class="flex items-center space-x-4">
+        <img src="{% static 'logoSalesiana.png' %}" alt="Universidad Salesiana de Bolivia" class="h-12 w-auto">
+        <span class="font-bold text-lg text-blue-700">Universidad Salesiana de Bolivia</span>
+    </div>
+ 
+    <!-- Links -->
+    <div class="flex space-x-10 ">
+        <a href="#inicio" class="hover:text-blue-400">Inicio</a>
+        <a href="#beneficios" class="hover:text-blue-400">Beneficios</a>
+        <a href="#caracteristicas" class="hover:text-blue-400">Características</a>
+        <a href="#testimonios" class="hover:text-blue-400">Testimonios</a>
+    </div>
+
+    <!-- Botón de sesión -->
+    <div>
+        <a href="{% url 'login' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Iniciar sesión</a>
+    </div>
+</nav>

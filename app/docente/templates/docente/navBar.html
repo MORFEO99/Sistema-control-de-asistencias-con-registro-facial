@@ -1,0 +1,26 @@
+<aside class="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
+  <div class="p-5">
+    <h2 class="text-xl font-bold mb-6">MENÚ PRINCIPAL</h2>
+
+    <ul class="space-y-4">
+      <li>
+        <a href="{% url 'docente:perfil' %}" class="hover:text-blue-400">Perfil</a>
+      </li>
+
+      <li>
+      </li>
+      <a href="{% url 'docente:asignacion' %}" class="hover:text-blue-400"> Lista de Clases a Impartir</a>
+      <li>
+        <a href="{% url 'reporteAsistencia:reporteDiario_docente' docente.codDocente %}" class="hover:text-blue-400">Reporte Diario de Asistencias</a>
+      </li>
+      <li>
+        <a href="{% url 'reporteAsistencia:reporteGlobal_docente' docente.codDocente %}" class="hover:text-blue-400">Reporte Global de Asistencias</a>
+      </li>
+    </ul>
+  </div>
+
+  
+  <div class="mt-auto p-5">
+    <a href="{% url 'index'%}" class="text-red-400 hover:text-red-600">Cerrar Sesión</a>
+  </div>
+</aside>

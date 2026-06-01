@@ -1,0 +1,33 @@
+<aside class="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
+
+  <!-- PARTE SUPERIOR -->
+  <div class="p-5">
+    <h2 class="text-xl font-bold mb-6">MENÚ PRINCIPAL</h2>
+    <ul class="space-y-4">
+      <li>
+        <a href="{% url 'direccionCarrera:perfil' %}" class="flex items-center gap-2 hover:text-blue-400">Perfil</a>
+      </li>
+    <!-- -->
+      <li>
+        <a href="{% url 'direccionCarrera:gestion_estudiantes' %}" class="flex items-center gap-2 hover:text-blue-400">Listado de Estudiantes</a>
+      </li>
+      
+      <li>
+        <a href="{% url 'direccionCarrera:gestion_docentes' %}" class="flex items-center gap-2 hover:text-blue-400">Listado de Docentes</a>
+      </li>
+      <!-- Reportes  -->
+      <li><a href="{% url 'reporteAsistencia:reporteDiario_direccionCarrera' %}" class="flex items-center gap-2 hover:text-blue-400">Reporte diarios de Asistencias</a>
+      </li>
+      <li>
+        <a href="{% url 'reporteAsistencia:reporteGlobal_direccionCarrera' %}" class="flex items-center gap-2 hover:text-blue-400">Reporte Global de Asistencias</a>
+      </li>
+    </ul>
+  </div>
+
+
+  
+  <!-- PARTE INFERIOR -->
+  <div class="mt-auto p-5">
+    <a href="{% url 'index'%}" class="flex items-center gap-2 text-red-400 hover:text-red-600">Cerrar Sesión</a>
+  </div>
+</aside>

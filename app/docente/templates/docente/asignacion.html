@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block sidebar %}
+  {% include "docente/navBar.html" %}
+{% endblock %}
+
+
+{% block content %}
+<!-- Materias y paralelos -->
+<div class="bg-white shadow-lg rounded-xl p-8 mx-auto mt-2">
+  <h2 class="text-2xl font-bold text-gray-700 mb-4">Materias y paralelos asignados</h2>
+  <table class="min-w-full border border-gray-200 rounded-lg">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-2 text-left">Materia</th>
+        <th class="px-4 py-2 text-left">Paralelo</th>
+        <th class="px-4 py-2 text-left">Semestre</th>
+        <th class="px-4 py-2 text-left">Carrera</th>
+        <th class="px-4 py-2 text-left">Aula</th>
+        <th class="px-4 py-2 text-left">Día</th>
+        <th class="px-4 py-2 text-left">Horario</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for a in asignaciones %}
+              <tr>
+                    <td class="border px-4 py-2">{{ a.materia.nombre }}</td>
+                    <td class="border px-4 py-2">{{ a.paralelo.numeroParalelo }}</td>
+                    <td class="border px-4 py-2">{{ a.paralelo.semestre.nombre }}</td>
+                    <td class="border px-4 py-2">{{ a.paralelo.carrera.nombre }}</td>
+                    <td class="border px-4 py-2">{{ a.paralelo.aula }}</td>
+                    <td class="border px-4 py-2">{{ a.horario.get_dia_display }}</td>
+                    <td class="border px-4 py-2">{{ a.horario.hora_inicio }} - {{ a.horario.hora_fin }}</td>
+                </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7" class="border px-4 py-2 text-center text-gray-500">
+                    No tienes AsignacionDocentees registradas.
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

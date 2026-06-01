@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-6 bg-gray-100 min-h-screen">
+
+    <!-- ENCABEZADO -->
+    <div class="bg-white rounded-2xl shadow p-6 mb-6 flex justify-between items-center">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Reporte de asistencias Global</h2>
+            <p class="text-gray-500 text-sm">Materia: {{ docente.asignaciondocente_set.first.materia.nombre }}</p>
+            <p class="text-gray-500 text-sm">Docente: {{ docente.nombre }} {{ docente.apellido }}</p>
+            <p class="text-gray-500 text-sm">Paralelo: {{ docente.asignaciondocente_set.first.paralelo.numeroParalelo }}</p>
+            <p class="text-gray-500 text-sm">Semestre: {{ docente.asignaciondocente_set.first.materia.semestre.nombre }}</p>
+            <p class="text-gray-500 text-sm">Carrera: {{ docente.carrera.nombre }}</p>
+            <p class="text-gray-500 text-sm">Fecha: {{ hoy|date:"d/m/Y" }}</p>
+            <p class="text-gray-500 text-sm">Total de Asistencias: {{ asistencias|length }}</p>
+
+        </div>
+
+        <a href="{% url 'reporteAsistencia:pdf_global_docente' docente.codDocente %}"
+           class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition">
+           Descargar PDF
+        </a>
+    </div>
+
+    <!-- CONTENIDO AGRUPADO POR FECHA -->
+    {% for grupo in data %}
+        <div class="bg-white rounded-2xl shadow mb-6 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm text-left">
+                    <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-3">RU</th>
+                            <th class="px-4 py-3">Nombre</th>
+                            <th class="px-4 py-3">Hora</th>
+                            <th class="px-4 py-3">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                        {% for a in grupo.asistencias %}
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-3">{{ a.estudiante.RU }}</td>
+                            <td class="px-4 py-3">{{ a.estudiante.nombre }} {{ a.estudiante.apellido }}</td>
+                            <td class="px-4 py-3 text-gray-600">{{ a.hora_ingreso }}</td>
+                            <td class="px-4 py-3 text-gray-600">{{ a.fecha_ingreso|date:"d/m/Y" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block sidebar %} {% include "estudiante/navBar.html" %} {% endblock %} {% block content %}
+<div class="bg-white shadow-lg rounded-xl p-8 mx-auto mt-2">
+  <table class="min-w-full border border-gray-200 rounded-lg text-center">
+    <h2 class="text-2xl font-bold mb-4">Horario de Clases</h2>
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-2">Hora</th>
+        {% for dia in dias %}
+        <th class="px-4 py-2">{{ dia }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for fila in horario %}
+      <tr>
+        <td class="border px-4 py-2 font-semibold">{{ fila.rango }}</td>
+        {% for materia in fila.materias %}
+        <td class="border px-4 py-2">{{ materia }}</td>
+        {% endfor %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="border px-4 py-2 text-center text-gray-500">
+          No tienes horario asignado.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

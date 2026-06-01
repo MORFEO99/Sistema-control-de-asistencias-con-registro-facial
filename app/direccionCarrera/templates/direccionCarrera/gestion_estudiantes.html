@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block sidebar %}
+
+{% include "direccionCarrera/navBar.html" %}
+
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Lista de Estudiantes</h2>
+    <a href="{% url 'direccionCarrera:crear_estudiante' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Agregar a un Nuevo Estudiante</a>
+</div>
+
+<!-- Filtros -->
+<div class="bg-gray-100 p-4 rounded mb-6 flex flex-wrap gap-4 items-end">
+    <form method="get" class="flex flex-wrap gap-4">
+        <div>
+            <label class="block font-bold mb-1">Semestre</label>
+            <select name="semestre" class="border rounded p-2">
+                <option value="">Todos</option>
+                {% for semestre in semestres %}
+                    <option value="{{ semestre.pk }}" {% if semestre_seleccionado == semestre.pk %}selected{% endif %}>
+                        {{ semestre.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label class="block font-bold mb-1">Paralelo</label>
+            <select name="paralelo" class="border rounded p-2">
+                <option value="">Todos</option>
+                {% for paralelo in paralelos %}
+                    <option value="{{ paralelo.pk }}" {% if paralelo_seleccionado == paralelo.pk %}selected{% endif %}>
+                        {{ paralelo.numeroParalelo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filtrar</button>
+            <a href="{% url 'direccionCarrera:gestion_estudiantes' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Limpiar</a>
+        </div>
+    </form>
+</div>
+
+<!-- Tabla de estudiantes -->
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4 border">RU</th>
+                <th class="py-2 px-4 border">Nombre</th>
+                <th class="py-2 px-4 border">Email</th>
+                <th class="py-2 px-4 border">Carrera</th>
+                <th class="py-2 px-4 border">Semestre</th>
+                <th class="py-2 px-4 border">Paralelo</th>
+                <th class="py-2 px-4 border">Foto</th>
+                <th class="py-2 px-4 border">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in estudiantes %}
+            <tr class="hover:bg-gray-100">
+                <td class="py-2 px-4 border">{{ e.RU }}</td>
+                <td class="py-2 px-4 border">{{ e.nombre }} {{ e.apellido }}</td>
+                <td class="py-2 px-4 border">{{ e.correo_institucional }}</td>
+                <td class="py-2 px-4 border">{{ e.carrera.nombre|default:"-" }}</td>
+                <td class="py-2 px-4 border">{{ e.semestre.nombre|default:"-" }}</td>
+                <td class="py-2 px-4 border">{{ e.paralelo.numeroParalelo|default:"-" }}</td>
+                <td class="py-2 px-4 border">
+                    {% if e.foto %}
+                        <img src="{{ e.foto.url }}" width="40" height="40" class="rounded-full">
+                    {% else %}
+                        Sin foto
+                    {% endif %}
+                </td>
+                <td class="py-2 px-4 border">
+                    <a href="{% url 'direccionCarrera:editar_estudiante' e.pk %}" class="bg-blue-600 text-white px-2 py-1 rounded text-sm hover:bg-blue-700">Editar</a>
+                    <a href="{% url 'direccionCarrera:eliminar_estudiante' e.pk %}" class="bg-red-600 text-white px-2 py-1 rounded text-sm hover:bg-red-700">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="py-2 px-4 text-center">No hay estudiantes registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

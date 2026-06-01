@@ -1,0 +1,95 @@
+<section id="beneficios" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            Beneficios para Todos
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Estudiantes -->
+            <div
+                class="bg-gray-50 rounded-xl p-8 text-center shadow-md hover:-translate-y-2 transition flex flex-col justify-between">
+                <div>
+                    <div class="mb-5 flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px"
+                            fill="#2563EB">
+                            <path
+                                d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38 19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5t127.92 44.69q31.3 14.13 50.19 40.97Q800-292 800-254v94H160Zm60-60h520v-34q0-16-9.5-30.5T707-306q-64-31-117-42.5T480-360q-57 0-111 11.5T252-306q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570-631q0-39-25.5-64.5T480-721q-39 0-64.5 25.5T390-631q0 39 25.5 64.5T480-541Zm0-90Zm0 411Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Para Estudiantes</h3>
+                    <ul class="text-left space-y-2 text-gray-700">
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Perfil que permite el seguimiento de su rendimiento académico</li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Modernización de procesos</li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Transparencia en los procesos </li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Agilización del proceso de registro</li>
+                    </ul>
+                </div>
+
+                <a href= "{% url 'tomar_asistencia' %}">
+                    <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
+                        Tomar Asistencia
+                    </button>
+                </a>
+            </div>
+            <!-- Universidad -->
+            <div
+                class="bg-gray-50 rounded-xl p-8 text-center shadow-md hover:-translate-y-2 transition flex flex-col justify-between">
+                <div>
+                    <div class="mb-5 flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px"
+                            fill="#2563EB">
+                            <path
+                                d="M80-120v-720h390v165h410v555H80Zm60-60h105v-105H140v105Zm0-165h105v-105H140v105Zm0-165h105v-105H140v105Zm0-165h105v-105H140v105Zm165 495h105v-105H305v105Zm0-165h105v-105H305v105Zm0-165h105v-105H305v105Zm0-165h105v-105H305v105Zm165 495h350v-435H470v105h80v60h-80v105h80v60h-80v105Zm185-270v-60h60v60h-60Zm0 165v-60h60v60h-60Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Para la Universidad</h3>
+                    <ul class="text-left space-y-2 text-gray-700">
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Prestigio tecnológico</li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Análisis Predictivo</li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Seguridad institucional</li>
+                        <li
+                            class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                            Monitoreo de acceso</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Personal de Carrera -->
+            <div class="bg-gray-50 rounded-xl p-8 text-center shadow-md hover:-translate-y-2 transition">
+                <div class="mb-5 flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px"
+                        fill="#2563EB">
+                        <path
+                            d="M480-120 200-272v-240L40-600l440-240 440 240v320h-80v-276l-80 44v240L480-120Zm0-332 274-148-274-148-274 148 274 148Zm0 241 200-108v-151L480-360 280-470v151l200 108Zm0-241Zm0 90Zm0 0Z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-blue-600 mb-4">Para el Personal de Carrera</h3>
+                <ul class="text-left space-y-2 text-gray-700">
+                    <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                        Supervisión de clases</li>
+                    <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                        Seguimiento de estudiantes</li>
+                    <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                        Reportes y estadísticas</li>
+                    <li class="relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-green-500">
+                        Comodidad total</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

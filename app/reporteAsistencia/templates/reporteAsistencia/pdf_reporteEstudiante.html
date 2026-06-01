@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Personal Estudiante</title>
+    <style>
+        body {
+            font-family: Helvetica;
+            font-size: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .bordered td, .bordered th {
+            border: 1px solid black;
+            padding: 4px;
+        }
+        .header-table {
+            border: 1px solid black;
+        }
+        .header-table td {
+            border: 1px solid black;
+            vertical-align: middle;
+        }
+        .title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .subtitle {
+            text-align: left;
+            font-size: 11px;
+        }
+        .section {
+            margin-top: 10px;
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 3px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🔹 Encabezado -->
+<table class="header-table">
+    <tr>
+        <td style="width: 30%; text-align:center;">
+            <img src="{{ logo_url }}" alt="Logo salesiana" width="120">
+        </td>
+        <td style="width: 70%;">
+            <div class="title">REPORTE PERSONAL</div>
+            <div class="subtitle">Carrera: {{ estudiante.carrera.nombre }}</div>
+            <div class="subtitle">Nombre: {{ estudiante.nombre }} {{ estudiante.apellido }}</div>
+            <div class="subtitle">Fecha: {{ hoy|date:"d/m/Y" }}</div>
+            <div class="subtitle">Total de asistencias: {{ asistencias|length }}</div>
+        </td>
+    </tr>
+</table>
+
+<!-- Contenido agrupado por fecha -->
+{% for grupo in data %}
+    <div class="section">Fecha: {{ grupo.fecha|date:"d/m/Y" }}</div>
+    <table class="bordered">
+        <tr>
+            <th>Materia</th>
+            <th>Hora Ingreso</th>
+            <th>Paralelo</th>
+        </tr>
+        {% for asistencia in grupo.asistencias %}
+        <tr>
+            <td>{{ asistencia.asignacion_docente.materia.nombre }}</td>
+            <td>{{ asistencia.hora_ingreso }}</td>
+            <td>{{ asistencia.asignacion_docente.paralelo.numeroParalelo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
+
+</body>
+</html>

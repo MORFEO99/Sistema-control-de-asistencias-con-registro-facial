@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block sidebar %}
+
+{% include "direccionCarrera/navBar.html" %}
+
+{% endblock %}
+
+{% block content %}
+<!-- TITULO -->
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">
+      Perfil Dirección de Carrera
+    </h1>
+
+
+    <!-- CARD -->
+    <div class="bg-white shadow-lg rounded-xl p-8 max-w-4xl mx-auto mt-2">
+
+      <!-- GRID -->
+      <div class="grid grid-cols-2 gap-6">
+
+        <!-- CODIGO -->
+        <div>
+          <label class="text-gray-500 text-sm">Codigo de Usuario</label>
+          <div class="bg-gray-100 p-3 rounded-lg mt-1">
+            {{ direccionCarrera.codDireccionCarrera }}
+          </div>
+        </div>
+
+
+        <!-- NOMBRE -->
+        <div>
+          <label class="text-gray-500 text-sm">Nombre</label>
+          <div class="bg-gray-100 p-3 rounded-lg mt-1">
+            {{ direccionCarrera.nombre }}
+          </div>
+        </div>
+
+        <!-- APELLIDO -->
+        <div>
+          <label class="text-gray-500 text-sm">Apellido</label>
+          <div class="bg-gray-100 p-3 rounded-lg mt-1">
+            {{ direccionCarrera.apellido }}
+          </div>
+        </div>
+
+        <!-- CARRERA -->
+        <div>
+          <label class="text-gray-500 text-sm">Carrera</label>
+          <div class="bg-gray-100 p-3 rounded-lg mt-1">
+            {{ direccionCarrera.carrera.nombre }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+<!-- Botón cambiar contraseña -->
+<div class="text-center mt-8">
+    <a href="{% url 'cambiar_password' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
+        Cambiar contraseña
+    </a>
+</div>
+
+{% endblock %}

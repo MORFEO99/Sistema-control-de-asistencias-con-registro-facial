@@ -1,0 +1,2 @@
+[2026-05-31 16:49:27] INFO - Inicio de sesión exitoso: DIR001 desde IP 127.0.0.1
+[2026-05-31 16:49:44] INFO - Inicio de sesión exitoso: 56046 desde IP 127.0.0.1

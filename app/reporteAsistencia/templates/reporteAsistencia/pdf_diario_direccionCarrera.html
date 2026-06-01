@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Reporte Diario - Dirección de Carrera</title>
+    <style>
+
+        body {
+            font-family: Helvetica;
+            font-size: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bordered td, .bordered th {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        .header-table {
+            border: 1px solid black;
+        }
+
+        .header-table td {
+            border: 1px solid black;
+            vertical-align: middle;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            text-align: left;
+            font-size: 11px;
+        }
+
+        .section {
+            margin-top: 10px;
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 3px;
+        }
+
+        .center {
+            text-align: center;
+        }
+        
+    </style>
+    </head>
+
+    <body>
+
+    <!--encabezado -->
+    <table class="header-table">
+        <tr>
+            <!-- LOGO -->
+            <td style="width: 30%; text-align:center;">
+                <img src="{{ logo_url }}" alt="Logo salesiana" width="120">
+            </td>
+
+            <!-- TITULO -->
+            <td style="width: 70%;">
+                <div class="title">REPORTE DIARIO</div>
+                <div class="subtitle">Carrera: {{ direccion.carrera.nombre }}</div>
+                <div class="subtitle">Nombre: {{ direccion.nombre }} {{ direccion.apellido }}</div>                
+                <div class="subtitle">Fecha: {{ hoy|date:"d/m/Y" }}</div>
+            </td>
+        </tr>
+    </table>
+
+    <!--content -->
+    {% for semestre in data %}
+
+        <div class="section">
+            Semestre: {{ semestre.semestre.nombre }}  
+        </div>
+
+        {% for paralelo in semestre.paralelos %}
+
+            <div style="margin-top:5px;">
+                <strong>Paralelo:</strong> {{ paralelo.paralelo.numeroParalelo }}
+            </div>
+
+            <table class="bordered">
+                <tr>
+                    <th>RU</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Materia</th>
+                    <th>Hora Ingreso</th>
+                </tr>
+
+                {% for estudiante in paralelo.estudiantes %}
+                    {% for asistencia in estudiante.asistencias %}
+                    <tr>
+                        <td>{{ estudiante.estudiante.RU }}</td>
+                        <td>{{ estudiante.estudiante.nombre }}</td>
+                        <td>{{ estudiante.estudiante.apellido }}</td>
+                        <td>{{ asistencia.asignacion_docente.materia.nombre }}</td>
+                        <td>{{ asistencia.hora_ingreso }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+
+            </table>
+
+        {% endfor %}
+
+    {% endfor %}
+
+    </body>
+</html>

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+
+{% include "direccionCarrera/navBar.html" %}
+
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Lista de Docentes</h2>
+    <a href="{% url 'direccionCarrera:crear_docente' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Agregar a un Nuevo Docente</a>
+</div>
+<!--Filtros-->
+<div class="bg-gray-100 p-4 rounded mb-6 flex flex-wrap gap-4 items-end">
+    <form method="GET" class="mb-4 flex gap-4 items-end">
+
+        <!-- SEMESTRE -->
+        <div>
+            <label class="block text-sm font-semibold">Semestre</label>
+            <select name="semestre" class="border rounded p-2">
+                <option value="">Todos</option>
+                {% for s in semestres %}
+                    <option value="{{ s.codSemestre }}"
+                        {% if s.codSemestre == semestre_seleccionado %}selected{% endif %}>
+                        {{ s.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- PARALELO -->
+        <div>
+            <label class="block text-sm font-semibold">Paralelo</label>
+            <select name="paralelo" class="border rounded p-2">
+                <option value="">Todos</option>
+                {% for p in paralelos %}
+                    <option value="{{ p.codParalelo }}"
+                        {% if p.codParalelo == paralelo_seleccionado %}selected{% endif %}>
+                        {{ p.numeroParalelo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- BOTONES -->
+        <div>
+            <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Filtrar
+            </button>
+
+            <a href="{% url 'direccionCarrera:gestion_docentes' %}"
+            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+            Limpiar
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4 border">Código</th>
+                <th class="py-2 px-4 border">Nombre</th>
+                <th class="py-2 px-4 border">Carrera</th>
+                <th class="py-2 px-4 border">Semestre</th>
+                <th class="py-2 px-4 border">Paralelo</th>
+                <th class="py-2 px-4 border">Materia</th>
+                <th class="py-2 px-4 border">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in docentes %}
+            <tr class="hover:bg-gray-100">
+                <td class="py-2 px-4 border">{{ d.codDocente }}</td>
+                <td class="py-2 px-4 border">{{ d.nombre }} {{ d.apellido }}</td>
+                <td class="py-2 px-4 border">{{ d.carrera.nombre|default:"-" }}</td>
+
+                <td class="py-2 px-4 border">
+                        {% for asignacion in d.asignaciondocente_set.all %}
+                            {{ asignacion.paralelo.semestre.nombre }} <br>
+                        {% endfor %}    
+                </td>
+
+                <td class="py-2 px-4 border">
+                        {% for asignacion in d.asignaciondocente_set.all %}
+                            {{ asignacion.paralelo.numeroParalelo }} <br>
+                        {% endfor %}
+                </td>
+
+                <td class="py-2 px-4 border">
+                    {% for asignacion in d.asignaciondocente_set.all %}
+                        {{ asignacion.materia.nombre }} <br>
+                        {% endfor %}
+                </td>
+
+                    <td class="py-2 px-4 border">
+                    <a href="{% url 'direccionCarrera:editar_docente' d.pk %}" class="bg-blue-600 text-white px-2 py-1 rounded text-sm hover:bg-blue-700">Editar</a>
+                    <a href="{% url 'direccionCarrera:eliminar_docente' d.pk %}" class="bg-red-600 text-white px-2 py-1 rounded text-sm hover:bg-red-700">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="py-2 px-4 text-center">No hay docentes registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

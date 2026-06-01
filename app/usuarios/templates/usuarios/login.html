@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<div class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Login</h1>
+
+ <!-- Mensaje de error -->
+  {% if error %}
+    <div class="bg-red-100 text-red-600 p-3 rounded mb-4 text-center">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+
+    <!-- CódigoUsuario-->
+    <div>
+      <label for="id_codigo" class="block text-gray-600 mb-2">Código de Usuario</label>
+      <input type="text" name="codigo" id="codigoUsuario"
+        class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none px-2 py-2"
+        placeholder="Ingrese su código">
+      {% if form.codigo.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.codigo.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+      <label for="id_password" class="block text-gray-600 mb-2">Contraseña</label>
+      <input type="password" name="password" id="password"
+        class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none px-2 py-2"
+        placeholder="Ingrese su contraseña">
+      {% if form.password.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.password.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Recordarme -->
+    <div class="flex items-center">
+      <input id="remember" type="checkbox"
+        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+      <span class="ml-2 text-sm text-gray-600">Recordarme</span>
+    </div>
+
+    <!-- Botón -->
+    <div class="text-center mt-6">
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+        Iniciar sesión
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

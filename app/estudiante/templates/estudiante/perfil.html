@@ -1,0 +1,85 @@
+{% extends "base.html" %} 
+{% block sidebar %} 
+{% include "estudiante/navBar.html" %} {% endblock %} {% block content %}
+
+<h1 class="text-3xl font-bold mb-8">Perfil de Estudiante</h1>
+
+<!-- CARD -->
+<div class="bg-white shadow-lg rounded-xl p-8 max-w-4xl mx-auto mt-2">
+  <!-- FOTO -->
+  <div class="flex justify-center mb-6">
+    {% if estudiante.foto %}
+    <img
+      src="{{ estudiante.foto.url }}"
+      class="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-md"
+    />
+    {% else %}
+    <div
+      class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center"
+    >
+      <span class="text-gray-600">Sin foto</span>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- GRID -->
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <label class="text-gray-500 text-sm">Código de Estudiante</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">{{ estudiante.RU }}</div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Correo Institucional</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.correo_institucional }}
+      </div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Nombres</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">{{ estudiante.nombre }}</div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Apellidos</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.apellido }}
+      </div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Fecha de nacimiento</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.fecha_nacimiento|date:"d/m/Y" }}
+      </div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Carrera</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.carrera.nombre }}
+      </div>
+    </div>
+    <div>
+      <label class="text-gray-500 text-sm">Semestre</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.semestre }}
+      </div>
+    </div>
+
+    <div>
+      <label class="text-gray-500 text-sm">Paralelo</label>
+      <div class="bg-gray-100 p-3 rounded-lg mt-1">
+        {{ estudiante.paralelo.numeroParalelo }}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Botón para cambiar contraseña -->
+<div class="text-center mt-8">
+    <a href="{% url 'cambiar_password' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
+        Cambiar contraseña
+    </a>
+</div>
+{% endblock %}
